@@ -3,7 +3,6 @@ import numpy as np
 import util
 
 '''features to add:
-Tune parameters
 stochastic elements
 -wind speed/direciton
 -temperature
@@ -18,7 +17,7 @@ stochastic elements
 #humidVec: vector of humidity values over the next 14 days
 #density: tree density
 #r: side length of partitions in km
-class firemodel: 
+class firemodel:
     
     def __init__(self, initialState, tempHigh, tempLow, precip, wind, humid, density=0.6, r=0.25):
         #make all basic parameter retrievable
