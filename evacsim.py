@@ -42,3 +42,53 @@ class path:
             self._peoplearr[0] += 1
             return True
         
+        
+class neighborhood:
+    #Rate people leave, in fraction per timestep.
+    leavingrates = [.10, .2, .3, .2, .15, .05]
+    
+    def __init__(self, numpeople, out):
+        self._numpeopleleft = numpeople
+        self._out = out
+        
+        self._stepssinceevac = 0
+        
+        self._leavingpertimestep = []
+        for x in neighborhood.leavingrates:
+            self._leavingpertimestep.append(x * numpeople)
+        
+        #People who are trying to leave but are blocked by traffic.
+        self._numpeoplequeued  = 0
+        
+    def timestep(self):
+        #If there are people who haven't left their homes yet
+        if self._stepssinceevac < len(self._leavingpertimestep):
+            
+            #Each person tries to get on the road, if not queues.
+            for x in range(self._leavingpertimestep[self._stepssinceevac]):
+                if(self._out.accept() == True):
+                    self._numpeopleleft -= 1
+                else:
+                    self._numpeoplequeued += 1
+                self._leavingpertimestep[self._stepssinceevac] -= 1
+                
+            #People queued try to leave
+            for x in range(self._numpeoplequeued):
+                if(self._out.accept() == True):
+                    self._numpeoplequeued -= 1
+                    self._numpeopleleft -= 1
+                    
+        self._stepssinceevac += 1
+                    
+    
+    def peopleleft(self):
+        return self._numpeopleleft <= 0
+        
+        
+class evaczone:
+    def __init__(self):
+        self.numevacuated = 0
+    
+    def accept(self):
+        self.numevacuated += 1
+        return True
