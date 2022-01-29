@@ -13,8 +13,6 @@ stochastic elements
 
 
 '''
-
-
 #initialState: initial fire state matrix
 #tempHigh: vector of high temperatures over the next 14 days
 #tempLow: vector of low temperatures over the next 14 days
@@ -45,11 +43,9 @@ class firemodel:
         self.precip = precip[0]
         self.mask = np.ones(initialState.shape)
     def fireSpread(self):
-        kernel = util.findKernel(self.state, self.wind, self.humid, self.precip) #calculate kernel for convolution
+        kernel = util.findKernel(self.state, self.wind, self.humid, self.precip, self.temp) #calculate kernel for convolution
         self.state = util.maskConvolve(self.state, kernel, self.mask) #convolve but skipping burnt out cells
         self.burnout() #check if any regions are over 100% burned
-        
-        #need to add sensitivity to wind, humidity, and preciptiation
     
     def burnout(self):
         for i in range(self.state.shape[0]):
@@ -57,6 +53,16 @@ class firemodel:
                 if self.state[i,j] >= 1:
                     self.state[i,j] = 0
                     self.mask[i,j] = 0
+                    
+    def updateTemp(self):
+        day, hour = util.dayTime(self.t)
+        highT = self.tempHighs[day]
+        lowT = self.tempLows[day]
+        lowT_new = self.tempLows[day+1]
+        if hour < 8:
+            self.temp = lowT + hour * (highT - lowT)/8
+        else:
+            self.temp = highT + (hour - 8) * (lowT_new - highT)/16
     
     def timeStep(self):
         self.fireSpread()

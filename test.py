@@ -13,7 +13,7 @@ humid = np.array([49.2,57.1,55.2,41.5,40.0,44.1,45.1,42.5,45.3,38.1,34.3,35.3,50
 
 testModel = model.firemodel(initialState, tempHigh, tempLow, precip, wind, humid)
 
-'''plt.figure(1)
+plt.figure(1)
 plt.imshow(testModel.visualize(), cmap=plt.get_cmap('inferno'))
 plt.show
 for i in range(7):
@@ -22,9 +22,9 @@ for i in range(7):
     
     plt.figure(i+2)
     plt.imshow(testModel.visualize(), cmap=plt.get_cmap('inferno'))
-    plt.show'''
+    plt.show
     
 for i in range(336):
     testModel.timeStep()
     
-plt.imshow(testModel.visualize(),cmap=plt.get_cmap('inferno'))
+#plt.imshow(testModel.visualize(),cmap=plt.get_cmap('inferno'))
