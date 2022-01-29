@@ -12,6 +12,7 @@ def findKernel(state,wind,humidity,precip,temp):
     precipRand = np.random.rand()
     if precipRand < precip:
         kernel[1,1] = 1
+        return kernel
     if temp <= 51.61: #dew point
         kernel[1,1] = 1
         return kernel
