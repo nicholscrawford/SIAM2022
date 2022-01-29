@@ -3,15 +3,12 @@ import numpy as np
 import util
 
 '''features to add:
-temperature dynamics/dewpoint
-
+Tune parameters
 stochastic elements
 -wind speed/direciton
 -temperature
 -precipitation
 -humidity
-
-
 '''
 #initialState: initial fire state matrix
 #tempHigh: vector of high temperatures over the next 14 days
