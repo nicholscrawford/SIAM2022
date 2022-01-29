@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import model
 import time
 
-initialState = np.zeros((5,5))
-initialState[2,0] = 0.1
+initialState = np.zeros((36,88))
+initialState[18,44] = 0.1
 
 tempHigh = np.array([94,87,86,97,98,89,92,96,98,99,103,103,97,91])
 tempLow = np.array([60,56,55,59,61,61,57,58,59,64,65,64,62,57])
@@ -18,7 +18,8 @@ plt.figure(1)
 plt.imshow(testModel.state, cmap=plt.get_cmap('inferno'))
 plt.show
 for i in range(7):
-    testModel.fireSpread()
+    testModel.timeStep()
+    #print(testModel.state)
     
     plt.figure(i+2)
     plt.imshow(testModel.state, cmap=plt.get_cmap('inferno'))
