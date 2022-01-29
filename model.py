@@ -3,6 +3,14 @@ import numpy as np
 import util
 
 '''features to add:
+temperature dynamics/dewpoint
+
+stochastic elements
+-wind speed/direciton
+-temperature
+-precipitation
+-humidity
+
 
 '''
 
@@ -47,9 +55,12 @@ class firemodel:
         for i in range(self.state.shape[0]):
             for j in range(self.state.shape[1]):
                 if self.state[i,j] >= 1:
-                    self.state[i,j] = 0 
+                    self.state[i,j] = 0
                     self.mask[i,j] = 0
     
     def timeStep(self):
         self.fireSpread()
         self.t += 1
+        
+    def visualize(self):
+        return self.state + (1-self.mask)
