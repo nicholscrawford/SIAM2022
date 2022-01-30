@@ -3,12 +3,13 @@ timestep = 5
 class path:
     
     #len is in km, speedlim is in km/hr, out is an object that can accept people (has acceptperson() method, yay for python ambiguity)
-    def __init__(self, len, speedlim, out):
+    def __init__(self, len, speedlim, out, location):
         self._len = len
         self._speedlim = speedlim
         minutesonroad = (len / speedlim) * 60
         timestepsonroad = minutesonroad/timestep
         self._peoplearr = [0] * round(timestepsonroad+ 0.5)
+        self.location = location
         
         self._out = out
         capacityperkm = (speedlim*(3.0/3600.0)+4.5e-3)**-1
