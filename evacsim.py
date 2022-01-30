@@ -9,24 +9,24 @@ class path:
         self._speedlim = speedlim
         minutesonroad = (len / speedlim) * 60
         timestepsonroad = minutesonroad/timestep
-        self._peoplearr = [0] * int(timestepsonroad+ 0.5)
+        self._peoplearr = [0] * round(timestepsonroad+ 0.5)
         
         self._out = out
-        self._capacityperelement = int(path.capacityperkm * (len / len(self._peoplearr)) )
+        self._capacityperelement = int(path.capacityperkm * (len / self._peoplearr.__len__()) )
         
     def timestep(self):
         i = len(self._peoplearr) - 1
         
         #Try and move the people out at the end
-        for i in range(self._peoplearr[i]):
-            if self._out.acceptperson() == True:
+        for j in range(self._peoplearr[i]):
+            if self._out.accept() == True:
                 self._peoplearr[i] -= 1
         i -= 1
         
         #Try to drive foreward.
         while i >= 0:
             self._driveforeward(i)
-            i += 1
+            i -= 1
         
     def _driveforeward(self, i):
         for i in range(self._peoplearr[i]):
@@ -35,12 +35,19 @@ class path:
                 self._peoplearr[i+1] += 1
         
     #Returns true if person is accepted.
-    def _acceptperson(self):
+    def accept(self):
         if(self._peoplearr[0] >= self._capacityperelement):
             return False
         else:
             self._peoplearr[0] += 1
             return True
+        
+    def isempty(self):
+        total = 0
+        for x in self._peoplearr:
+            total += x
+            
+        return total <= 0
         
         
 class neighborhood:
@@ -55,7 +62,7 @@ class neighborhood:
         
         self._leavingpertimestep = []
         for x in neighborhood.leavingrates:
-            self._leavingpertimestep.append(x * numpeople)
+            self._leavingpertimestep.append(int(x * numpeople + 0.5))
         
         #People who are trying to leave but are blocked by traffic.
         self._numpeoplequeued  = 0
@@ -81,7 +88,7 @@ class neighborhood:
         self._stepssinceevac += 1
                     
     
-    def peopleleft(self):
+    def isempty(self):
         return self._numpeopleleft <= 0
         
         
@@ -92,3 +99,5 @@ class evaczone:
     def accept(self):
         self.numevacuated += 1
         return True
+    
+    
