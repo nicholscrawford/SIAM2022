@@ -55,18 +55,18 @@ paths["l"] = path(0.75, 25, paths["j"])
 
 
 neighborhoods = {}
-neighborhoods["1,8"] = neighborhood(30, paths["l"])
-neighborhoods["1,4"] = neighborhood(30, paths["k"])
-neighborhoods["3,8"] = neighborhood(30, paths["j"])
-neighborhoods["3,4"] = neighborhood(30, paths["i"])
-neighborhoods["6,8"] = neighborhood(30, paths["h"])
-neighborhoods["6,4"] = neighborhood(30, paths["g"])
-neighborhoods["9,8"] = neighborhood(30, paths["f"])
-neighborhoods["9,4"] = neighborhood(30, paths["e"])
-neighborhoods["12,8"] = neighborhood(30, paths["d"])
-neighborhoods["12,4"] = neighborhood(30, paths["e"])
-neighborhoods["15,8"] = neighborhood(30, paths["b"])
-neighborhoods["15,4"] = neighborhood(30, end)
+neighborhoods["1,8"] = neighborhood(1560, paths["l"])
+neighborhoods["1,4"] = neighborhood(1560, paths["k"])
+neighborhoods["3,8"] = neighborhood(975, paths["j"])
+neighborhoods["3,4"] = neighborhood(780, paths["i"])
+neighborhoods["6,8"] = neighborhood(975, paths["h"])
+neighborhoods["6,4"] = neighborhood(390, paths["g"])
+neighborhoods["9,8"] = neighborhood(1560, paths["f"])
+neighborhoods["9,4"] = neighborhood(0, paths["e"])
+neighborhoods["12,8"] = neighborhood(1170, paths["d"])
+neighborhoods["12,4"] = neighborhood(585, paths["e"])
+neighborhoods["15,8"] = neighborhood(780, paths["b"])
+neighborhoods["15,4"] = neighborhood(1560, end)
 
 #Evaccomplete > 0 means not all are evacuated.
 evaccomplete = 1
