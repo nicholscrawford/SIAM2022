@@ -43,16 +43,16 @@ paths = {}
 
 paths["a"] = path(0.5, 35, end, "17,1")
 paths["b"] = path(0.5, 35, paths["a"], "15,4")
-paths["c"] = path(0.375, 35, paths["a"])
-paths["d"] = path(0.875, 25, paths["b"])
-paths["e"] = path(0.75, 25, paths["c"])
-paths["f"] = path(0.75, 25, paths["d"])
-paths["g"] = path(0.75, 25, paths["e"])
-paths["h"] = path(0.75, 25, paths["f"])
-paths["i"] = path(0.75, 25, paths["g"])
-paths["j"] = path(0.75, 25, paths["h"])
-paths["k"] = path(0.75, 25, paths["i"])
-paths["l"] = path(0.75, 25, paths["j"])
+paths["c"] = path(0.375, 35, paths["a"], "15,4")
+paths["d"] = path(0.875, 25, paths["b"], "15,8")
+paths["e"] = path(0.75, 25, paths["c"], "12,4")
+paths["f"] = path(0.75, 25, paths["d"], "12,8")
+paths["g"] = path(0.75, 25, paths["e"], "9,4")
+paths["h"] = path(0.75, 25, paths["f"], "9,8")
+paths["i"] = path(0.75, 25, paths["g"], "6,4")
+paths["j"] = path(0.75, 25, paths["h"], "6,8")
+paths["k"] = path(0.75, 25, paths["i"], "3,5")
+paths["l"] = path(0.75, 25, paths["j"], "3,8")
 
 
 neighborhoods = {}
@@ -72,6 +72,7 @@ neighborhoods["15,4"] = neighborhood(1560, end)
 #Evaccomplete > 0 means not all are evacuated.
 evaccomplete = 1
 #Run timesteps, check if everyone is evacuated.
+currenttimestep = 0 
 while evaccomplete > 0:
     for n in neighborhoods:
         neighborhoods[n].timestep()
@@ -83,12 +84,14 @@ while evaccomplete > 0:
     for n in neighborhoods:
         evaccomplete += not neighborhoods[n].isempty()
         l = n.split(',')
-        if timestepBurnTimes[8-int(l[1])][int(l[0])-1] <= timestep + 20:
+        if timestepBurnTimes[8-int(l[1])][int(l[0])-1] <= currenttimestep + 20:
             print(l, "burned")
             raise Exception
     for p in paths:
         evaccomplete += not paths[p].isempty()
         l = paths[p].location.split(',')
-        if timestepBurnTimes[8-int(l[1])][int(l[0])-1] <= timestep + 20:
+        if timestepBurnTimes[8-int(l[1])][int(l[0])-1] <= currenttimestep + 20:
             print(l, "burned")
             raise Exception
+
+    currenttimestep += 1

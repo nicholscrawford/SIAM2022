@@ -80,11 +80,11 @@ class neighborhood:
                     self._numpeoplequeued += 1
                 self._leavingpertimestep[self._stepssinceevac] -= 1
                 
-            #People queued try to leave
-            for x in range(self._numpeoplequeued):
-                if(self._out.accept() == True):
-                    self._numpeoplequeued -= 1
-                    self._numpeopleleft -= 1
+        #People queued try to leave
+        for x in range(self._numpeoplequeued):
+            if(self._out.accept() == True):
+                self._numpeoplequeued -= 1
+                self._numpeopleleft -= 1
                     
         self._stepssinceevac += 1
                     
