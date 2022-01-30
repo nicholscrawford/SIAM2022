@@ -22,4 +22,7 @@ for i in range(336):
             if testModel.state[j+46,k+125] != 0:
                 burnTimes[j,k] = i + 1
 
-fig, ax1 = plt.imshow(burnTimes,cmap=plt.get_cmap('inferno'))
+fig, ax = plt.subplots()
+im = plt.imshow(burnTimes,cmap=plt.get_cmap('RdBu'))
+fig.colorbar(im)
+plt.show()
