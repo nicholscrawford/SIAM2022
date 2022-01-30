@@ -7,7 +7,7 @@ e3 = e2 * 3
 
 def percentevac(e1):
     SUM = sum(e1)
-    ind_pos = e1[1]
+    ind_pos = e1[0]
     for ind_pos in el:
         percent = e1[1] / SUM
         print (percent)
