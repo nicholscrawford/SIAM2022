@@ -40,19 +40,33 @@ end = evaczone()
 
 paths = {}
 
-paths["a"] = path(0.354, 35, end)
-paths["b"] = path(0.172, 35, paths["a"])
-paths["c"] = path(0.072, 35, paths["b"])
-paths["d"] = path(0.175, 25, paths["c"])
-paths["e"] = path(0.197, 25, paths["c"])
-paths["f"] = path(0.091, 25, paths["e"])
-paths["g"] = path(0.175, 25, paths["f"])
+paths["a"] = path(0.5, 35, end)
+paths["b"] = path(0.5, 35, paths["a"])
+paths["c"] = path(0.375, 35, paths["a"])
+paths["d"] = path(0.875, 25, paths["b"])
+paths["e"] = path(0.75, 25, paths["c"])
+paths["f"] = path(0.75, 25, paths["d"])
+paths["g"] = path(0.75, 25, paths["e"])
+paths["h"] = path(0.75, 25, paths["f"])
+paths["i"] = path(0.75, 25, paths["g"])
+paths["j"] = path(0.75, 25, paths["h"])
+paths["k"] = path(0.75, 25, paths["i"])
+paths["l"] = path(0.75, 25, paths["j"])
+
 
 neighborhoods = {}
-neighborhoods["17,1"] = neighborhood(30, paths["b"])
-neighborhoods["16,1"] = neighborhood(30, paths["e"])
-neighborhoods["16,2"] = neighborhood(30, paths["g"])
-neighborhoods["17,2"] = neighborhood(30, paths["d"])
+neighborhoods["1,8"] = neighborhood(30, paths["l"])
+neighborhoods["1,4"] = neighborhood(30, paths["k"])
+neighborhoods["3,8"] = neighborhood(30, paths["j"])
+neighborhoods["3,4"] = neighborhood(30, paths["i"])
+neighborhoods["6,8"] = neighborhood(30, paths["h"])
+neighborhoods["6,4"] = neighborhood(30, paths["g"])
+neighborhoods["9,8"] = neighborhood(30, paths["f"])
+neighborhoods["9,4"] = neighborhood(30, paths["e"])
+neighborhoods["12,8"] = neighborhood(30, paths["d"])
+neighborhoods["12,4"] = neighborhood(30, paths["e"])
+neighborhoods["15,8"] = neighborhood(30, paths["b"])
+neighborhoods["15,4"] = neighborhood(30, end)
 
 #Evaccomplete > 0 means not all are evacuated.
 evaccomplete = 1
