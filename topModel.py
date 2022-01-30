@@ -1,6 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import model
+from evacsim import evaczone
+from evacsim import path
+from evacsim import neighborhood
+
 
 initialState = np.zeros((100,200))
 initialState[49,57] = 0.1
@@ -26,3 +30,43 @@ fig, ax = plt.subplots()
 im = plt.imshow(burnTimes,cmap=plt.get_cmap('RdBu'))
 fig.colorbar(im)
 plt.show()
+#fig, ax1 = plt.imshow(burnTimes,cmap=plt.get_cmap('inferno'))
+
+#Run simulation
+totalpeople = 1000
+
+#Create paths and neighborhoods
+end = evaczone()
+
+paths = {}
+
+paths["a"] = path(0.354, 35, end)
+paths["b"] = path(0.172, 35, paths["a"])
+paths["c"] = path(0.072, 35, paths["b"])
+paths["d"] = path(0.175, 25, paths["c"])
+paths["e"] = path(0.197, 25, paths["c"])
+paths["f"] = path(0.091, 25, paths["e"])
+paths["g"] = path(0.175, 25, paths["f"])
+
+neighborhoods = {}
+neighborhoods["17,1"] = neighborhood(30, paths["b"])
+neighborhoods["16,1"] = neighborhood(30, paths["e"])
+neighborhoods["16,2"] = neighborhood(30, paths["g"])
+neighborhoods["17,2"] = neighborhood(30, paths["d"])
+
+#Evaccomplete > 0 means not all are evacuated.
+evaccomplete = 1
+#Run timesteps, check if everyone is evacuated.
+while evaccomplete > 0:
+    for n in neighborhoods:
+        neighborhoods[n].timestep()
+    for p in paths:
+        paths[p].timestep()
+    
+    evaccomplete = 0
+    
+    for n in neighborhoods:
+        evaccomplete += not neighborhoods[n].isempty()
+    for p in paths:
+        evaccomplete += not paths[p].isempty()
+>>>>>>> a21cf560d4138428872e8becea63fc2ba23c431e
