@@ -53,7 +53,8 @@ class path:
         
 class neighborhood:
     #Rate people leave, in fraction per timestep.
-    leavingrates = [.10, .2, .3, .2, .15, .05]
+    leavingrates = [0.175458, 0.260899, 0.135025, 0.0476705, 0.10025, 0.10624, 0.0339434, 0.140516]
+
     
     def __init__(self, numpeople, out):
         self._numpeopleleft = numpeople
