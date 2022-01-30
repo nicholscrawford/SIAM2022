@@ -32,6 +32,7 @@ im = plt.imshow(burnTimes,cmap=plt.get_cmap('RdBu'))
 fig.colorbar(im)
 plt.show()
 #fig, ax1 = plt.imshow(burnTimes,cmap=plt.get_cmap('inferno'))
+'''
 timestepBurnTimes = burnTimes * (60) / timestep
 #Run simulation
 totalpeople = 1000
@@ -95,3 +96,4 @@ while evaccomplete > 0:
             raise Exception
 
     currenttimestep += 1
+    '''
