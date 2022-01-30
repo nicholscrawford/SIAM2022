@@ -4,6 +4,7 @@ import model
 from evacsim import evaczone
 from evacsim import path
 from evacsim import neighborhood
+from evacsim import timestep
 
 
 initialState = np.zeros((100,200))
@@ -31,7 +32,7 @@ im = plt.imshow(burnTimes,cmap=plt.get_cmap('RdBu'))
 fig.colorbar(im)
 plt.show()
 #fig, ax1 = plt.imshow(burnTimes,cmap=plt.get_cmap('inferno'))
-
+timestepBurnTimes = burnTimes * (60) / timestep
 #Run simulation
 totalpeople = 1000
 
@@ -40,8 +41,8 @@ end = evaczone()
 
 paths = {}
 
-paths["a"] = path(0.5, 35, end)
-paths["b"] = path(0.5, 35, paths["a"])
+paths["a"] = path(0.5, 35, end, "17,1")
+paths["b"] = path(0.5, 35, paths["a"], "15,4")
 paths["c"] = path(0.375, 35, paths["a"])
 paths["d"] = path(0.875, 25, paths["b"])
 paths["e"] = path(0.75, 25, paths["c"])
@@ -81,5 +82,13 @@ while evaccomplete > 0:
     
     for n in neighborhoods:
         evaccomplete += not neighborhoods[n].isempty()
+        l = n.split(',')
+        if timestepBurnTimes[8-int(l[1])][int(l[0])-1] <= timestep + 20:
+            print(l, "burned")
+            raise Exception
     for p in paths:
         evaccomplete += not paths[p].isempty()
+        l = paths[p].location.split(',')
+        if timestepBurnTimes[8-int(l[1])][int(l[0])-1] <= timestep + 20:
+            print(l, "burned")
+            raise Exception
