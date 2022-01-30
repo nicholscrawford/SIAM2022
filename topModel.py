@@ -69,4 +69,3 @@ while evaccomplete > 0:
         evaccomplete += not neighborhoods[n].isempty()
     for p in paths:
         evaccomplete += not paths[p].isempty()
->>>>>>> a21cf560d4138428872e8becea63fc2ba23c431e

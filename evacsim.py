@@ -1,7 +1,6 @@
 timestep = 5
 
 class path:
-    capacityperkm = 1000
     
     #len is in km, speedlim is in km/hr, out is an object that can accept people (has acceptperson() method, yay for python ambiguity)
     def __init__(self, len, speedlim, out):
@@ -12,7 +11,8 @@ class path:
         self._peoplearr = [0] * round(timestepsonroad+ 0.5)
         
         self._out = out
-        self._capacityperelement = int(path.capacityperkm * (len / self._peoplearr.__len__()) )
+        capacityperkm = (speedlim*(3.0/3600.0)+4.5e-3)**-1
+        self._capacityperelement = int(capacityperkm * (len / self._peoplearr.__len__()) )
         
     def timestep(self):
         i = len(self._peoplearr) - 1
